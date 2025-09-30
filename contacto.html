@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contacto - Super Taquito</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="internal-header">
+    <a href="index.html" class="btn-outline">← Volver al inicio</a>
+  </header>
+  <section class="container section">
+    <h2>Contacto</h2>
+    <form id="discordForm">
+      <input type="text" id="name" placeholder="Tu nombre" required>
+      <textarea id="message" placeholder="Escribe tu mensaje" required></textarea>
+      <button type="submit" class="btn-outline">Enviar a Discord</button>
+    </form>
+    <p style="margin-top:20px">O comunicate directamente por WhatsApp:</p>
+    <a href="https://wa.me/5493510000000?text=Hola%20Super%20Taquito" class="btn-outline">WhatsApp</a>
+  </section>
+  <script>
+    document.getElementById('discordForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const webhookURL = "PEGÁ_ACÁ_TU_WEBHOOK_DE_DISCORD";
+      const name = document.getElementById('name').value;
+      const message = document.getElementById('message').value;
+      fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: `📩 Mensaje de ${name}: ${message}` })
+      }).then(() => alert("Mensaje enviado a Discord ✅"));
+    });
+  </script>
+</body>
+</html>
