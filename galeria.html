@@ -35,5 +35,22 @@
   <section class="gallery-slide" style="background-image:url('https://randomuser.me/api/portraits/women/12.jpg')">
     <div class="overlay"><h1>Persona 6</h1></div>
   </section>
+
+  <script>
+    // Animación de fade-in al hacer scroll
+    const slides = document.querySelectorAll('.gallery-slide');
+    const options = { threshold: 0.4 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, options);
+
+    slides.forEach(slide => {
+      observer.observe(slide);
+    });
+  </script>
 </body>
 </html>
