@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Menú - Super Taquito</title>
+  <link rel="icon" href="Imagenes/logospt.png" type="image/png">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/menu.css">
+  
+  <style>
+    /* 👇 FIX: asegura que las tarjetas se alineen en filas parejas */
+    .container > .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      justify-items: center;
+      align-items: stretch; /* fuerza que todas las tarjetas tengan misma altura */
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      height: 100%; /* que ocupen todo el alto disponible */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html">
+      <img src="Imagenes/Logito.png" alt="Logo Super Taquito" class="logo" width="80">
+    </a>
+    <a href="carrito.html" class="cart-btn">🛒 Ver Carrito (<span id="cart-count">0</span>)</a>
+  </header>
+
+  <!-- Catálogo principal -->
+  <section class="container">
+    <h2> Promociones Especiales</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="Imagenes/fajitascarte.jpg" alt="Fajita de carne">
+        <h3>Fajita de carne</h3>
+        <p>Deliciosa fajita con la mejor carne sazonada.</p>
+        <div class="price">$1500
+        </div>
+        <button onclick="agregarAlCarrito('Fajita de carne', 1500, 'Imagenes/fajitascarte.jpg')">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <img src="Imagenes/faijtasverdura.jpg" alt="Fajita de verdura">
+        <h3>Fajita de verdura</h3>
+        <p>Mezcla fresca de verduras de temporada.</p>
+        <div class="price">$1250</div>
+        <button onclick="agregarAlCarrito('Fajita de verdura', 1250, 'Imagenes/faijtasverdura.jpg')">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <img src="Imagenes/fajitaspollo.jpg" alt="Fajita de pollo">
+        <h3>Fajita de pollo</h3>
+        <p>Fajita con jugoso pollo a la plancha.</p>
+        <div class="price">$1500</div>
+        <button onclick="agregarAlCarrito('Taco de Pollo', 1500, 'Imagenes/fajitaspollo.jpg')">Agregar al carrito</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promociones especiales -->
+  <section class="container">
+    <h2> Promociones Especiales</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="Imagenes/promo1.png" alt="Taco Pollo + Aderezo + Gaseosa">
+        <h3>Promo 1</h3>
+        <p>Un taco de pollo + un aderezo + un vaso de gaseosa</p>
+        <div class="price">$2000</div>
+        <button onclick="agregarAlCarrito('Promo 1: Taco Pollo, Aderezo y Gaseosa', 2000, 'Imagenes/promo1.png')">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <img src="Imagenes/promo2.png" alt="Dos Tacos (Carne/Pollo) + Extras + Gaseosa">
+        <h3>Promo 2</h3>
+        <p>Dos tacos de carne o pollo + un extra cada uno + un vaso de gaseosa</p>
+        <div class="price">$3500</div>
+        <button onclick="agregarAlCarrito('Promo 2: 2 Tacos (Carne/Pollo), Extras y Gaseosa', 3500, 'Imagenes/promo2.png')">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <img src="Imagenes/promo3.png" alt="Taco Verdura + Gaseosa">
+        <h3>Promo 3</h3>
+        <p>Un taco de verdura + un vaso de gaseosa</p>
+        <div class="price">$1800</div>
+        <button onclick="agregarAlCarrito('Promo 3: Taco Verdura y Gaseosa', 1800, 'Imagenes/promo3.png')">Agregar al carrito</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function obtenerCarrito() {
+      return JSON.parse(localStorage.getItem("carrito")) || [];
+    }
+
+    function guardarCarrito(carrito) {
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      document.getElementById("cart-count").textContent = carrito.length;
+    }
+
+    function agregarAlCarrito(nombre, precio, imagenUrl) {
+      let carrito = obtenerCarrito();
+      carrito.push({ nombre, precio, imagenUrl });
+      guardarCarrito(carrito);
+      alert(`${nombre} agregado al carrito 🛒`);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const carrito = obtenerCarrito();
+      document.getElementById("cart-count").textContent = carrito.length;
+    });
+  </script>
+</body>
+</html>

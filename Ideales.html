@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ideales - Super Taquito</title>
+  <link rel="icon" href="Imagenes/Logito.png" type="image/png">
+
+  <!-- CSS base y estilos del módulo -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/pedidos.css">
+  
+</head>
+
+<body class="bg-pedidos">
+  <a href="index.html" class="btn-volver-img">
+      <img src="Imagenes/Logito.png" alt="Volver">
+  </a>
+
+  <section class="sobre-nosotros">
+    <div class="contenido-sobre">
+      <h2> Sobre Nosotros </h2>
+
+      <p>
+        En <strong>Super Taquito</strong> trabajamos con pasión, sabor y alegría.  
+        Somos una pequeña empresa dentro de la institución dedicada a ofrecer fajitas con ingredientes frescos, 
+        combinando la calidez de nuestro equipo con el auténtico gusto mexicano.  
+      </p>
+
+      <div class="bloques-sobre">
+        
+        <div class="bloque">
+          <div class="icono">💪</div>
+          <h3>MISIÓN</h3>
+          <p>
+            Brindar a nuestra comunidad productos frescos, deliciosos y accesibles, 
+            promoviendo el trabajo en equipo y la alegría de compartir buenos momentos.
+          </p>
+        </div>
+
+        <div class="bloque">
+          <div class="icono">🚀</div>
+          <h3>VISIÓN</h3>
+          <p>
+            Convertirnos en el lugar preferido dentro de la institución, reconocidos por nuestro sabor, 
+            compromiso y atención de calidad que deja huella en cada cliente.
+          </p>
+        </div>
+
+        <div class="bloque">
+          <div class="icono">❤️</div>
+          <h3>VALORES</h3>
+          <p>
+            Pasión, compromiso, respeto, innovación y trabajo en equipo.  
+            Cada fajita lleva un toque de lo mejor de nosotros 🌯✨.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const seccion = document.querySelector(".sobre-nosotros");
+      seccion.style.opacity = 0;
+      setTimeout(() => {
+        seccion.style.transition = "opacity 1.2s ease-in-out";
+        seccion.style.opacity = 1;
+      }, 200);
+    });
+  </script>
+
+</body>
+</html>

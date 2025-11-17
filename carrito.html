@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Carrito - Super Taquito</title>
+
+  <link rel="icon" href="Imagenes/logospt.png" type="image/png">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/carrito.css">
+</head>
+
+<body>
+
+  <header>
+    <!-- Logo flotante a la izquierda -->
+    <a href="menu.html" class="btn-volver-img">
+      <img src="Imagenes/Logito.png" alt="Volver al menú">
+    </a>
+
+    <!-- Título alineado a la derecha -->
+    <h2 class="titulo-carrito">🛒 Tu Carrito</h2>
+  </header>
+
+  <!-- Listado de productos -->
+  <div id="carrito-lista"></div>
+
+  <!-- Total -->
+  <div class="total" id="total"></div>
+
+  <!-- Botón confirmar -->
+  <button id="pedido-btn">Confirmar pedido por WhatsApp</button>
+
+
+<script>
+  /* ============================
+       VARIABLES DE CARRITO
+  ============================= */
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const lista = document.getElementById("carrito-lista");
+  const totalEl = document.getElementById("total");
+
+
+  /* ============================
+        RENDER PRINCIPAL
+  ============================= */
+  function renderCarrito() {
+    lista.innerHTML = "";
+    let total = 0;
+
+    if (carrito.length === 0) {
+      lista.innerHTML = `
+        <p style="
+          text-align:center;
+          margin-top:40px;
+          font-size:1.2rem;
+          color:#ff7043;">
+          ¡Tu carrito está vacío! Agrega algo delicioso del menú. 🌮
+        </p>`;
+      totalEl.textContent = "Total: $0";
+      return;
+    }
+
+    carrito.forEach((item, i) => {
+      item.cantidad = item.cantidad || 1;
+      const subtotal = item.precio * item.cantidad;
+      total += subtotal;
+
+      const div = document.createElement("div");
+      div.classList.add("carrito-item");
+
+      div.innerHTML = `
+        <div class="item-info">
+          <img src="${item.imagenUrl}" alt="${item.nombre}" class="item-img">
+          <span>${item.nombre}</span>
+        </div>
+
+        <div class="item-quantity-control">
+          <button class="qty-btn minus-btn" data-index="${i}" ${item.cantidad == 1 ? "disabled" : ""}>-</button>
+          <input class="qty-input" value="${item.cantidad}" readonly>
+          <button class="qty-btn plus-btn" data-index="${i}">+</button>
+        </div>
+
+        <div class="item-actions">
+          <span class="item-line-total">$${subtotal.toLocaleString("es-ES")}</span>
+          <button class="remove-btn" data-index="${i}">❌</button>
+        </div>
+      `;
+
+      lista.appendChild(div);
+    });
+
+    totalEl.textContent = "Total: $" + total.toLocaleString("es-ES");
+
+    activarEventos();
+  }
+
+
+  /* ============================
+         EVENTOS DINÁMICOS
+  ============================= */
+  function activarEventos() {
+
+    // Eliminar ítems
+    document.querySelectorAll(".remove-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const i = btn.dataset.index;
+        carrito.splice(i, 1);
+        guardar();
+        renderCarrito();
+      });
+    });
+
+    // Botón +
+    document.querySelectorAll(".plus-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const i = btn.dataset.index;
+        carrito[i].cantidad++;
+        guardar();
+        renderCarrito();
+      });
+    });
+
+    // Botón -
+    document.querySelectorAll(".minus-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const i = btn.dataset.index;
+        if (carrito[i].cantidad > 1) {
+          carrito[i].cantidad--;
+          guardar();
+          renderCarrito();
+        }
+      });
+    });
+  }
+
+
+  /* ============================
+             GUARDAR
+  ============================= */
+  function guardar() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+
+
+  /* ============================
+         CONFIRMAR PEDIDO
+  ============================= */
+  document.getElementById("pedido-btn").addEventListener("click", () => {
+    if (carrito.length === 0) {
+      alert("Tu carrito está vacío 😅");
+      return;
+    }
+
+    const total = carrito.reduce((t,i)=>t + i.precio * i.cantidad, 0);
+
+    const listaPedido = carrito
+      .map(i => `${i.cantidad}x ${i.nombre} ($${(i.precio*i.cantidad).toLocaleString("es-ES")})`)
+      .join("\n");
+
+    const mensaje = encodeURIComponent(
+      "Hola Super Taquito! Quiero hacer este pedido:\n" +
+      listaPedido +
+      `\n\nTotal: $${total.toLocaleString("es-ES")}`
+    );
+
+    window.open(`https://wa.me/5493517015356?text=${mensaje}`, "_blank");
+  });
+
+
+  /* ============================
+      INICIAR
+  ============================= */
+  renderCarrito();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+/* Fondo */
+.bg-pedidos {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+  min-height: 100vh;
+  padding: 20px;
+  font-family: var(--fuente);
+  color: white;
+}
+
+/* Header */
+.internal-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.internal-header .logo {
+  width: 90px;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.7));
+  animation: float 3s infinite ease-in-out;
+}
+
+/* Animación del logo */
+@keyframes float {
+  0% { transform:translateY(0); }
+  50% { transform:translateY(-6px); }
+  100% { transform:translateY(0); }
+}
+
+.titulo-pedidos {
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+/* Contenedor */
+.pedidos-container {
+  margin-top: 30px;
+}
+
+/* Tarjetas de pedidos */
+.pedido-card {
+  background: rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.pedido-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.estado-tag {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.items-list {
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.btn-estado {
+  margin-top: 10px;
+  background: #ff5722;
+  color:white;
+  padding: 10px;
+  border-radius: 10px;
+  border:none;
+  cursor:pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.btn-estado:hover {
+  background:#ff7043;
+}

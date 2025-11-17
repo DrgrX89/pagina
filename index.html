@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Super Taquito</title>
+
+  <link rel="icon" href="Imagenes/logospt.png" type="logospt/png">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/inicio.css">
+
+</head>
+<body>
+  <section class="hero">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="Imagenes/video.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay">
+
+      <h1 class="logo">Super Taquito</h1>
+      <h2 class="subtitle">Tacos que enamoran y nunca demoran.</h2>
+
+      <div class="nav-buttons">
+        <a href="menu.html" class="btn-outline">Menú</a>
+        <a href="OLA.html" class="btn-outline">Video Speach</a>
+        <a href="Ideales.html" class="btn-outline">Ideales</a>
+        <a href="contacto.html" class="btn-outline">Contacto</a>
+      </div>
+
+      <div class="bottom-logo">
+        <img src="Imagenes/Logito.png" alt="Logo Super Taquito" id="adminAccess">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 🔐 Acceso oculto al login -->
+  <script>
+    document.getElementById("adminAccess").addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+  </script>
+
+</body>
+</html>

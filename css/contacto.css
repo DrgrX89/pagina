@@ -1,0 +1,111 @@
+/* MODIFICADO: Color de fondo como en carrito.css */
+body.bg-contacto {
+  background-color: #ffd187;
+  font-family: var(--fuente);
+  color: #333;
+}
+
+.contact-section {
+  max-width: 600px;
+  margin: 100px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  animation: fadeInUp 1s ease;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.btn-outline {
+  background: var(--naranja);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.btn-outline:hover {
+  background: var(--verde);
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  margin-top: 20px;
+  background: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  transform: scale(1.05);
+}
+
+#success-message {
+  margin-top: 60px;
+  color: var(--verde);
+  font-weight: bold;
+  animation: fadeIn 0.5s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* ==========================================================
+   🛒 ESTILOS DEL LOGO FLOTANTE (Importados de carrito.css)
+   ========================================================== */
+
+.logo-float {
+  position: absolute;
+  left: 20px;
+  /* CAMBIO: Se baja el logo de 30px a 50px (20px más) */
+  top: 50px;
+  transform: translateY(-20%);
+  z-index: 50;
+}
+
+.logo-animated {
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+
+  /* Sombra */
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.45));
+
+  /* Animación de flote */
+  animation: float 3s ease-in-out infinite;
+
+  transition: 0.25s ease;
+}
+
+.logo-animated:hover {
+  transform: scale(1.12);
+  opacity: 1;
+  filter:
+    drop-shadow(0 0 12px rgba(255,255,255,1))
+    drop-shadow(0 0 25px rgba(255,180,0,0.95));
+}
+
+@keyframes float {
+  0%   { transform: translate(0px, 0px); }
+  50%  { transform: translate(0px, -10px); }
+  100% { transform: translate(0px, 0px); }
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contacto - Super Taquito</title>
+  <link rel="icon" href="Imagenes/logospt.png" type="image/png">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/contacto.css">
+</head>
+<body class="bg-contacto">
+
+<header class="internal-header">
+  <a href="index.html" class="logo-float">
+    <img src="Imagenes/Logito.png" alt="Volver al inicio" class="logo-animated">
+  </a>
+</header>
+
+<section class="contact-section">
+  <h2>📞 Contáctanos</h2>
+  <p>Tu opinión nos importa. Escríbenos o comunícate directamente por WhatsApp.</p>
+
+  <form id="webhookForm" class="contact-form">
+    <div class="form-group">
+      <input type="text" id="name" placeholder="Tu nombre" required>
+    </div>
+    <div class="form-group">
+      <textarea id="mensaje" placeholder="Tu mensaje..." required></textarea>
+    </div>
+    <button type="submit" class="btn-outline">Enviar</button>
+  </form>
+
+  <a href="https://wa.me/5493517015356?text=${mensaje}" 
+     class="btn-whatsapp" target="_blank">💬 Contactar por WhatsApp</a>
+
+  <div id="estado" class="hidden">✅ ¡Mensaje enviado con éxito!</div>
+</section>
+
+<script>
+  document.getElementById("webhookForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const nombre = document.getElementById("name").value.trim();
+    const mensaje = document.getElementById("mensaje").value.trim();
+    const estado = document.getElementById("estado");
+
+    if (!mensaje || !nombre) {
+      estado.textContent = "Por favor, completa todos los campos.";
+      estado.style.color = "red";
+      estado.classList.remove("hidden");
+      return;
+    }
+
+    // 🟢 Cuando tengas el webhook, reemplazá "" por su URL
+    fetch("https://discord.com/api/webhooks/1438372610265317447/pk_OK11xzxsQ-y06s2G8mPQYBz-B0RxgH5Q3of5ETeeVpSPP7extkjnZQNwFR7aNFth5", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: `📩 Nuevo mensaje de ${nombre}:\n${mensaje}` })
+    })
+    .then(response => {
+      if (response.ok) {
+        estado.textContent = "Mensaje enviado correctamente, se te responderá a la brevedad.";
+        estado.style.color = "green";
+        estado.classList.remove("hidden");
+        document.getElementById("mensaje").value = "";
+        document.getElementById("name").value = "";
+      } else {
+        estado.textContent = "Error al enviar el mensaje.";
+        estado.style.color = "red";
+        estado.classList.remove("hidden");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      estado.textContent = "Error al enviar el mensaje.";
+      estado.style.color = "red";
+      estado.classList.remove("hidden");
+    });
+  });
+</script>
+
+</body>
+</html>
